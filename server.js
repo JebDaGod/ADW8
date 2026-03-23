@@ -88,7 +88,7 @@ app.post('/api/logout', (req, res) => {
 
 // PROJECT ROUTES
 
-// GET all projects (PROTECTED)
+// GET all projects 
 app.get('/api/projects', isAuthenticated, async (req, res) => {
     try {
         const projects = await Project.findAll({
@@ -118,7 +118,7 @@ app.get('/api/projects/:id', async (req, res) => {
     }
 });
 
-// CREATE project (PROTECTED)
+// CREATE project 
 app.post('/api/projects', isAuthenticated, async (req, res) => {
     try {
         const { name, description, status, dueDate } = req.body;

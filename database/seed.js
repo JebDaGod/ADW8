@@ -1,8 +1,7 @@
 const { db, Project, Task } = require('./setup');
 const bcrypt = require('bcryptjs');
-// Sample project data
 
-// Sample users (for when User model is added in step 5)
+// Sample users 
 const sampleUsers = [
   {
     username: "john_doe",
@@ -15,7 +14,7 @@ const sampleUsers = [
     password: "password123"
   }
 ];
-
+// Sample projects
 const sampleProjects = [
     {
         name: "Website Redesign",

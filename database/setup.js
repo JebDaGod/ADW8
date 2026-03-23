@@ -8,6 +8,27 @@ const db = new Sequelize({
   logging: console.log
 });
 
+// Define User model
+const User = db.define('User', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+});
+
 // Define Project model
 const Project = db.define('Project', {
     id: {
@@ -66,8 +87,30 @@ const Task = db.define('Task', {
     }
 });
 
+// Relationships
+
+// User → Project
+User.hasMany(Project, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
+});
+
+Project.belongsTo(User, {
+    foreignKey: 'userId'
+});
+
+// Project → Task
+Project.hasMany(Task, {
+    foreignKey: 'projectId',
+    onDelete: 'CASCADE'
+});
+
+Task.belongsTo(Project, {
+    foreignKey: 'projectId'
+});
+
 // Export for use in other files
-module.exports = { db, Project, Task };
+module.exports = { db, User, Project, Task };
 
 // Create database and tables
 async function setupDatabase() {
